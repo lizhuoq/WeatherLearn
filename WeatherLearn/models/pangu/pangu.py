@@ -7,8 +7,8 @@ from .utils.earth_position_index import get_earth_position_index
 from .utils.shift_window_mask import get_shift_window_mask, window_partition, window_reverse
 from .utils.patch_embed import PatchEmbed2D, PatchEmbed3D
 from .utils.patch_recovery import PatchRecovery2D, PatchRecovery3D
-from .utils.pad import get_pad2d, get_pad3d
-from .utils.crop import crop2d, crop3d
+from .utils.pad import get_pad3d
+from .utils.crop import crop3d
 
 
 class UpSample(nn.Module):
@@ -150,7 +150,7 @@ class EarthAttention3D(nn.Module):
         self.register_buffer("earth_position_index", earth_position_index)
 
         self.qkv = nn.Linear(dim, dim * 3, bias=qkv_bias)
-        self.attn_drop = attn_drop
+        self.attn_drop = nn.Dropout(attn_drop)
         self.proj = nn.Linear(dim, dim)
         self.proj_drop = nn.Dropout(proj_drop)
 
@@ -214,11 +214,12 @@ class EarthSpecificBlock(nn.Module):
         norm_layer (nn.Module, optional): Normalization layer.  Default: nn.LayerNorm
     """
 
-    def __init__(self, dim, input_resolution, num_heads, window_size=None, shift_size=0, mlp_ratio=4.,
+    def __init__(self, dim, input_resolution, num_heads, window_size=None, shift_size=None, mlp_ratio=4.,
                  qkv_bias=True, qk_scale=None, drop=0., attn_drop=0., drop_path=0., act_layer=nn.GELU,
                  norm_layer=nn.LayerNorm):
         super().__init__()
         window_size = (2, 6, 12) if window_size is None else window_size
+        shift_size = (1, 3, 6) if shift_size is None else shift_size
         self.dim = dim
         self.input_resolution = input_resolution
         self.num_heads = num_heads
@@ -229,8 +230,14 @@ class EarthSpecificBlock(nn.Module):
         self.norm1 = norm_layer(dim)
         padding = get_pad3d(input_resolution, window_size)
         self.pad = nn.ZeroPad3d(padding)
+
+        pad_resolution = list(input_resolution)
+        pad_resolution[0] += (padding[-1] + padding[-2])
+        pad_resolution[1] += (padding[2] + padding[3])
+        pad_resolution[2] += (padding[0] + padding[1])
+
         self.attn = EarthAttention3D(
-            dim=dim, input_resolution=input_resolution, window_size=window_size, num_heads=num_heads, qkv_bias=qkv_bias,
+            dim=dim, input_resolution=pad_resolution, window_size=window_size, num_heads=num_heads, qkv_bias=qkv_bias,
             qk_scale=qk_scale, attn_drop=attn_drop, proj_drop=drop
         )
 
@@ -241,11 +248,6 @@ class EarthSpecificBlock(nn.Module):
 
         shift_pl, shift_lat, shift_lon = self.shift_size
         self.roll = shift_pl and shift_lon and shift_lat
-
-        pad_resolution = list(input_resolution)
-        pad_resolution[0] += (padding[-1] + padding[-2])
-        pad_resolution[1] += (padding[2] + padding[3])
-        pad_resolution[2] += (padding[0] + padding[1])
 
         if self.roll:
             attn_mask = get_shift_window_mask(pad_resolution, window_size, shift_size)
@@ -275,7 +277,8 @@ class EarthSpecificBlock(nn.Module):
             # B*num_lon, num_pl*num_lat, win_pl, win_lat, win_lon, C
         else:
             shifted_x = x
-            x_windows = window_partition(shifted_x, self.window_size)  # B*num_lon, num_pl*num_lat, win_pl, win_lat, win_lon, C
+            x_windows = window_partition(shifted_x, self.window_size)
+            # B*num_lon, num_pl*num_lat, win_pl, win_lat, win_lon, C
 
         win_pl, win_lat, win_lon = self.window_size
         x_windows = x_windows.view(x_windows.shape[0], x_windows.shape[1], win_pl * win_lat * win_lon, C)
@@ -296,7 +299,7 @@ class EarthSpecificBlock(nn.Module):
         # crop, end pad
         x = crop3d(x.permute(0, 4, 1, 2, 3), self.input_resolution).permute(0, 2, 3, 4, 1)
 
-        x = x.view(B, Pl * Lat * Lon, C)
+        x = x.reshape(B, Pl * Lat * Lon, C)
         x = shortcut + self.drop_path(x)
 
         x = x + self.drop_path(self.mlp(self.norm2(x)))
