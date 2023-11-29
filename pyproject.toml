@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "weatherlearn"
+version = "0.1.0"
+description = "Implementation of the PyTorch version of the Weather Deep Learning Model Zoo."
+authors = ["Li zhuoqun <m15004059308@163.com>"]
+license = "BY-NC-SA 4.0"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+torch = "2.1.0"
+timm = "0.9.10"
+numpy = "1.23.5"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

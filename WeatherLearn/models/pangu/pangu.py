@@ -410,8 +410,8 @@ class Pangu(nn.Module):
             drop_path=drop_path[:2]
         )
         # The outputs of the 2nd encoder layer and the 7th decoder layer are concatenated along the channel dimension.
-        self.patchrecovery2d = PatchRecovery2D((181, 360), (4, 4), 2 * embed_dim, 4)
-        self.patchrecovery3d = PatchRecovery3D((7, 181, 360), (2, 4, 4), 2 * embed_dim, 5)
+        self.patchrecovery2d = PatchRecovery2D((721, 1440), (4, 4), 2 * embed_dim, 4)
+        self.patchrecovery3d = PatchRecovery3D((13, 721, 1440), (2, 4, 4), 2 * embed_dim, 5)
 
     def forward(self, surface, surface_mask, upper_air):
         """
