@@ -1,0 +1,5 @@
+.idea/
+WeatherLearn/models/__pycache__/
+WeatherLearn/models/pangu/__pycache__/
+WeatherLearn/models/pangu/utils/__pycache__/
+tests/models/pangu/__pycache__/
