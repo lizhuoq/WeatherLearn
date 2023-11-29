@@ -109,3 +109,12 @@ class TestMain(unittest.TestCase):
         output_surface, output_upper_air = pangu(surface, surface_mask, upper_air)
         self.assertEqual(output_surface.shape, surface.shape)
         self.assertEqual(output_upper_air.shape, upper_air.shape)
+
+    def test_little_pangu(self):
+        pangu = Pangu(embed_dim=4, num_heads=(2, 2, 2, 2))
+        surface = torch.randn(1, 4, 721, 1440)
+        surface_mask = torch.randn(3, 721, 1440)
+        upper_air = torch.randn(1, 5, 13, 721, 1440)
+        output_surface, output_upper_air = pangu(surface, surface_mask, upper_air)
+        self.assertEqual(output_surface.shape, surface.shape)
+        self.assertEqual(output_upper_air.shape, upper_air.shape)
