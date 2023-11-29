@@ -31,7 +31,7 @@ if __name__ == '__main__':
     
     pangu_weather = Pangu()
     
-    output_surface, output_upper_air = pangu_weather.forward(surface, surface_mask, upper_air)
+    output_surface, output_upper_air = pangu_weather(surface, surface_mask, upper_air)
 ```
 #### References
 ```
