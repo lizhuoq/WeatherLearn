@@ -60,3 +60,4 @@ if __name__ == '__main__':
 
 ## TODO
 - [ ] FengWu Model (https://arxiv.org/pdf/2304.02948v1.pdf)
+- [ ] FuXi Model (https://arxiv.org/pdf/2306.12873v3.pdf)
