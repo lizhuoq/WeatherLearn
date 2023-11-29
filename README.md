@@ -59,3 +59,4 @@ if __name__ == '__main__':
 [BY-NC-SA 4.0 license](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 ## TODO
+- [] FengWu Model (https://arxiv.org/pdf/2304.02948v1.pdf)
