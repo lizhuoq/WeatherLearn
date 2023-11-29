@@ -6,6 +6,7 @@ from WeatherLearn.models import Pangu
 
 import unittest
 
+
 class TestMain(unittest.TestCase):
     def test_downsample(self):
         in_dim = 1
