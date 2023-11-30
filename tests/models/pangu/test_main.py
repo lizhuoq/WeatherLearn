@@ -2,7 +2,7 @@ import torch
 
 from WeatherLearn.models.pangu.pangu import EarthAttention3D, UpSample, DownSample, EarthSpecificBlock, BasicLayer
 from WeatherLearn.models.pangu.utils.shift_window_mask import get_shift_window_mask
-from WeatherLearn.models import Pangu
+from WeatherLearn.models import Pangu, Pangu_lite
 
 import unittest
 
@@ -111,11 +111,11 @@ class TestMain(unittest.TestCase):
         self.assertEqual(output_surface.shape, surface.shape)
         self.assertEqual(output_upper_air.shape, upper_air.shape)
 
-    def test_little_pangu(self):
-        pangu = Pangu(embed_dim=4, num_heads=(2, 2, 2, 2))
+    def test_pangu_lite(self):
+        pangu_lite = Pangu_lite(embed_dim=4, num_heads=(1, 1, 1, 1))
         surface = torch.randn(1, 4, 721, 1440)
         surface_mask = torch.randn(3, 721, 1440)
         upper_air = torch.randn(1, 5, 13, 721, 1440)
-        output_surface, output_upper_air = pangu(surface, surface_mask, upper_air)
+        output_surface, output_upper_air = pangu_lite(surface, surface_mask, upper_air)
         self.assertEqual(output_surface.shape, surface.shape)
         self.assertEqual(output_upper_air.shape, upper_air.shape)
