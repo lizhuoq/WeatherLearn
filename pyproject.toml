@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "weatherlearn"
+name = "WeatherLearn"
 version = "0.1.0"
 description = "Implementation of the PyTorch version of the Weather Deep Learning Model Zoo."
 authors = ["Li zhuoqun <m15004059308@163.com>"]

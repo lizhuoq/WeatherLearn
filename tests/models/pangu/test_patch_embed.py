@@ -3,7 +3,7 @@ import unittest
 import torch
 from torch import nn
 
-from WeatherLearn.models.pangu.utils.patch_embed import PatchEmbed2D, PatchEmbed3D
+from weatherlearn.models.pangu.utils.patch_embed import PatchEmbed2D, PatchEmbed3D
 
 
 class PatchEmbedTest(unittest.TestCase):

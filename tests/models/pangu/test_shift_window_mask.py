@@ -1,6 +1,6 @@
 import unittest
 
-from WeatherLearn.models.pangu.utils.shift_window_mask import get_shift_window_mask
+from weatherlearn.models.pangu.utils.shift_window_mask import get_shift_window_mask
 
 
 class TestShiftWindowMask(unittest.TestCase):

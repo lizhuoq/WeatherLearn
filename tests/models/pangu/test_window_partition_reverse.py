@@ -2,7 +2,7 @@ import torch
 
 import unittest
 
-from WeatherLearn.models.pangu.utils.shift_window_mask import window_partition, window_reverse
+from weatherlearn.models.pangu.utils.shift_window_mask import window_partition, window_reverse
 
 
 class TestWindowPartition(unittest.TestCase):

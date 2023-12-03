@@ -1,6 +1,6 @@
 import unittest
 
-from WeatherLearn.models.pangu.utils.earth_position_index import get_earth_position_index
+from weatherlearn.models.pangu.utils.earth_position_index import get_earth_position_index
 
 
 class TestEarthPositionIndex(unittest.TestCase):

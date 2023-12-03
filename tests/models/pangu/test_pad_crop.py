@@ -3,8 +3,8 @@ from torch import nn
 
 import unittest
 
-from WeatherLearn.models.pangu.utils.pad import get_pad3d, get_pad2d
-from WeatherLearn.models.pangu.utils.crop import crop2d, crop3d
+from weatherlearn.models.pangu.utils.pad import get_pad3d, get_pad2d
+from weatherlearn.models.pangu.utils.crop import crop2d, crop3d
 
 
 class TestPad(unittest.TestCase):

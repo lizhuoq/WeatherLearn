@@ -1,8 +1,8 @@
 import torch
 
-from WeatherLearn.models.pangu.pangu import EarthAttention3D, UpSample, DownSample, EarthSpecificBlock, BasicLayer
-from WeatherLearn.models.pangu.utils.shift_window_mask import get_shift_window_mask
-from WeatherLearn.models import Pangu, Pangu_lite
+from weatherlearn.models.pangu.pangu import EarthAttention3D, UpSample, DownSample, EarthSpecificBlock, BasicLayer
+from weatherlearn.models.pangu.utils.shift_window_mask import get_shift_window_mask
+from weatherlearn.models import Pangu, Pangu_lite
 
 import unittest
 

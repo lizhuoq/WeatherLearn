@@ -2,7 +2,7 @@ import unittest
 
 import torch
 
-from WeatherLearn.models.pangu.utils.patch_recovery import PatchRecovery3D, PatchRecovery2D
+from weatherlearn.models.pangu.utils.patch_recovery import PatchRecovery3D, PatchRecovery2D
 
 
 class TestPatchRecovery(unittest.TestCase):
