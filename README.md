@@ -74,10 +74,41 @@ if __name__ == '__main__':
   year={2022}
 }
 ```
+### Fuxi
+#### Model Architecture
+![fuxi_architecture](pic/fuxi_architecture.png)  
+#### Example  
+```python
+from weatherlearn.models import Fuxi
 
+import torch
+
+if __name__ == '__main__':
+    B = 1  # batch_size
+    in_chans = out_chans = 70  # number of input channels or output channels
+    input = torch.randn(B, in_chans, 2, 721, 1440)  # B C T Lat Lon
+    
+    fuxi = Fuxi()  
+    # patch_size : Default: (2, 4, 4)
+    # embed_dim : Default: 1536
+    # num_groups : Default: 32
+    # num_heads : Default: 8
+    # window_size : Default: 7
+    
+    output = fuxi(input)  # B C Lat Lon
+```  
+#### References
+[FuXi: A cascade machine learning forecasting system for 15-day global weather forecast
+](https://arxiv.org/abs/2306.12873)
+
+Published on npj Climate and Atmospheric Science: [FuXi: a cascade machine learning forecasting system for 15-day global weather forecast
+](https://www.nature.com/articles/s41612-023-00512-1)
+
+by Lei Chen, Xiaohui Zhong, Feng Zhang, Yuan Cheng, Yinghui Xu, Yuan Qi, Hao Li
 ## License
 [BY-NC-SA 4.0 license](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 ## TODO
 - [ ] FengWu Model (https://arxiv.org/pdf/2304.02948v1.pdf)
-- [ ] FuXi Model (https://arxiv.org/pdf/2306.12873v3.pdf)
+- [x] FuXi Model (https://arxiv.org/pdf/2306.12873v3.pdf)  
+- [ ] Set a separate window_size for longitude and latitude in the Fuxi model.
