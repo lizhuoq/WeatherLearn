@@ -6,3 +6,4 @@ tests/models/pangu/__pycache__/
 examples/pangu_lite/data
 dist/
 weatherlearn/data_utils/__pycache__/
+papers/

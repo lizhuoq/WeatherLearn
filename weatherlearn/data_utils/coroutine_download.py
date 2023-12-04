@@ -47,6 +47,7 @@ async def download(src_name: Src_name,
     Download era5 reanalysis data by coroutine method
     """
     if os.path.exists(out_path):
+        print(f"{out_path} is exists.")
         return
 
     c = cdsapi.Client(debug=True, wait_until_complete=False)

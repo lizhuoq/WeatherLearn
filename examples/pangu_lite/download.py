@@ -28,18 +28,18 @@ async def main():
     makedirs(test_root, exist_ok=True)
 
     train_years = YEARS[:-2]
-    valid_years = YEARS[-1]
-    test_years = YEARS[-2]
+    valid_years = YEARS[-1:]
+    test_years = YEARS[-2:-1]
 
     for years, root in zip([train_years, valid_years, test_years], [train_root, valid_root, test_root]):
         # download surface variables
         await asyncio.gather(*[download("reanalysis-era5-single-levels", SURFACE_VARIABLES,
-                                        year, month, DAYS, TIMES, join(root, f"{year}_{month}.nc"))
+                                        year, month, DAYS, TIMES, join(root, f"surface_{year}_{month}.nc"))
                                for year in years for month in MONTHS])
 
         # download upper_air variables
         await asyncio.gather(*[download("reanalysis-era5-pressure-levels", UPPER_AIR_VARIABLES,
-                                        year, month, DAYS, TIMES, join(root, f"{year}_{month}.nc"),
+                                        year, month, DAYS, TIMES, join(root, f"upper_air_{year}_{month}.nc"),
                                         pressure_level=PRESSURE_LEVEL)
                                for year in years for month in MONTHS])
 
