@@ -1,10 +1,11 @@
 import torch
 from torch import nn
 from torch.nn import functional as F
+from timm.layers.helpers import to_2tuple
+from timm.models.swin_transformer_v2 import SwinTransformerV2Stage
 
 from typing import Sequence
 
-from ..swin_transformer.swin_transformer_v2 import BasicLayer
 from ..pangu.utils.pad import get_pad2d
 
 
@@ -39,7 +40,7 @@ class CubeEmbedding(nn.Module):
 
 
 class DownBlock(nn.Module):
-    def __init__(self, in_chans, out_chans, num_groups, num_residuals=2):
+    def __init__(self, in_chans: int, out_chans: int, num_groups: int, num_residuals: int = 2):
         super().__init__()
         self.conv = nn.Conv2d(in_chans, out_chans, kernel_size=(3, 3), stride=2, padding=1)
 
@@ -85,11 +86,20 @@ class UpBlock(nn.Module):
 
 
 class UTransformer(nn.Module):
-    def __init__(self, embed_dim, num_groups: list[int] | int, input_resolution, num_heads,
-                 window_size: int, depth=48):
+    """U-Transformer
+    Args:
+        embed_dim (int): Patch embedding dimension.
+        num_groups (int | tuple[int]): number of groups to separate the channels into.
+        input_resolution (tuple[int]): Lat, Lon.
+        num_heads (int): Number of attention heads in different layers.
+        window_size (int | tuple[int]): Window size.
+        depth (int): Number of blocks.
+    """
+    def __init__(self, embed_dim, num_groups, input_resolution, num_heads, window_size, depth):
         super().__init__()
-        num_groups = num_groups if isinstance(num_groups, list) else [num_groups] * 2
-        padding = get_pad2d(input_resolution, [window_size] * 2)
+        num_groups = to_2tuple(num_groups)
+        window_size = to_2tuple(window_size)
+        padding = get_pad2d(input_resolution, window_size)
         padding_left, padding_right, padding_top, padding_bottom = padding
         self.padding = padding
         self.pad = nn.ZeroPad2d(padding)
@@ -97,9 +107,7 @@ class UTransformer(nn.Module):
         input_resolution[0] = input_resolution[0] + padding_top + padding_bottom
         input_resolution[1] = input_resolution[1] + padding_left + padding_right
         self.down = DownBlock(embed_dim, embed_dim, num_groups[0])
-        self.layer = BasicLayer(
-            embed_dim, input_resolution, depth, num_heads, window_size
-        )
+        self.layer = SwinTransformerV2Stage(embed_dim, embed_dim, input_resolution, depth, num_heads, window_size)
         self.up = UpBlock(embed_dim * 2, embed_dim, num_groups[1])
 
     def forward(self, x):
@@ -113,9 +121,9 @@ class UTransformer(nn.Module):
         x = self.pad(x)
         _, _, pad_lat, pad_lon = x.shape
 
-        x = x.reshape(B, C, -1).transpose(1, 2)  # B Lat*Lon C
+        x = x.permute(0, 2, 3, 1)  # B Lat Lon C
         x = self.layer(x)
-        x = x.transpose(1, 2).reshape(B, C, pad_lat, pad_lon)
+        x = x.permute(0, 3, 1, 2)
 
         # crop
         x = x[:, :, padding_top: pad_lat - padding_bottom, padding_left: pad_lon - padding_right]
@@ -130,21 +138,21 @@ class UTransformer(nn.Module):
 class Fuxi(nn.Module):
     """
     Args:
-        img_size (Sequence[int]): T, Lat, Lon.
-        patch_size (Sequence[int]): T, Lat, Lon.
-        in_chans (int): number of input channels.
-        out_chans (int): number of output channels.
-        embed_dim (int): number of embed channels.
-        num_groups (Sequence[int] | int): number of groups to separate the channels into.
-        num_heads (int): Number of attention heads.
-        window_size (int): Local window size.
+        img_size (Sequence[int], optional): T, Lat, Lon.
+        patch_size (Sequence[int], optional): T, Lat, Lon.
+        in_chans (int, optional): number of input channels.
+        out_chans (int, optional): number of output channels.
+        embed_dim (int, optional): number of embed channels.
+        num_groups (Sequence[int] | int, optional): number of groups to separate the channels into.
+        num_heads (int, optional): Number of attention heads.
+        window_size (int | tuple[int], optional): Local window size.
     """
     def __init__(self, img_size=(2, 721, 1440), patch_size=(2, 4, 4), in_chans=70, out_chans=70,
                  embed_dim=1536, num_groups=32, num_heads=8, window_size=7):
         super().__init__()
         input_resolution = int(img_size[1] / patch_size[1] / 2), int(img_size[2] / patch_size[2] / 2)
         self.cube_embedding = CubeEmbedding(img_size, patch_size, in_chans, embed_dim)
-        self.u_transformer = UTransformer(embed_dim, num_groups, input_resolution, num_heads, window_size)
+        self.u_transformer = UTransformer(embed_dim, num_groups, input_resolution, num_heads, window_size, depth=48)
         self.fc = nn.Linear(embed_dim, out_chans * patch_size[1] * patch_size[2])
 
         self.patch_size = patch_size
