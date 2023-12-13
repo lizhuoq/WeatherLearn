@@ -1,15 +1,9 @@
 .idea/
-weatherlearn/models/__pycache__/
-weatherlearn/models/pangu/__pycache__/
-weatherlearn/models/pangu/utils/__pycache__/
-tests/models/pangu/__pycache__/
 examples/pangu_lite/data/test
 examples/pangu_lite/data/train
 examples/pangu_lite/data/valid
 dist/
-weatherlearn/data_utils/__pycache__/
 papers/
-examples/pangu_lite/__pycache__
-weatherlearn/models/fuxi/__pycache__
 examples/pangu_lite/temp.ipynb
 examples/pangu_lite/slurm*
+__pycache__/
