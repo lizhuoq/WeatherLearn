@@ -13,3 +13,5 @@ examples/pangu_lite/__pycache__
 weatherlearn/models/fuxi/__pycache__
 examples/pangu_lite/temp.ipynb
 examples/pangu_lite/slurm*
+examples/pangu_lite/epochs/
+examples/pangu_lite/bench/
