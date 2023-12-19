@@ -9,3 +9,6 @@ examples/pangu_lite/slurm*
 examples/pangu_lite/epochs/
 examples/pangu_lite/bench/
 __pycache__/
+inference/slurm*
+inference/pangu_weather_24.onnx
+inference/bench
