@@ -113,5 +113,4 @@ by Lei Chen, Xiaohui Zhong, Feng Zhang, Yuan Cheng, Yinghui Xu, Yuan Qi, Hao Li
 - [x] FuXi Model (https://arxiv.org/pdf/2306.12873v3.pdf)  
 - [x] Set a separate window_size for longitude and latitude in the Fuxi model.
 - [ ] Add more unittest.
-- [ ] Train a Pangu Lite model(may take some time).
 - [x] Infer the Pangu model using the pre-trained weights provided by the official Pangu repository.
