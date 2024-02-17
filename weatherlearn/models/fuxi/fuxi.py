@@ -53,13 +53,19 @@ class DownBlock(nn.Module):
         self.b = nn.Sequential(*blk)
 
     def forward(self, x):
+        _, _, h, w = x.shape
         x = self.conv(x)
 
         shortcut = x
 
         x = self.b(x)
 
-        return x + shortcut
+        res = x + shortcut
+        if h % 2 != 0:
+            res = res[:, :, :-1, :]
+        if w % 2 != 0:
+            res = res[:, :, :, :-1]
+        return res
 
 
 class UpBlock(nn.Module):
