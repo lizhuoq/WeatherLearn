@@ -272,7 +272,7 @@ class EarthSpecificBlock(nn.Module):
 
         shift_pl, shift_lat, shift_lon = self.shift_size
         if self.roll:
-            shifted_x = torch.roll(x, shifts=(-shift_pl, -shift_lat, -shift_lat), dims=(1, 2, 3))
+            shifted_x = torch.roll(x, shifts=(-shift_pl, -shift_lat, -shift_lon), dims=(1, 2, 3))
             x_windows = window_partition(shifted_x, self.window_size)
             # B*num_lon, num_pl*num_lat, win_pl, win_lat, win_lon, C
         else:
