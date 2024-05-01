@@ -1,0 +1,204 @@
+/public1/home/sch5024/.conda/envs/pangu/lib/python3.8/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: '/public1/home/sch5024/.conda/envs/pangu/lib/python3.8/site-packages/torchvision/image.so: undefined symbol: _ZN3c1017RegisterOperatorsD1Ev'If you don't plan on using image functionality from `torchvision.io`, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have `libjpeg` or `libpng` installed before building `torchvision` from source?
+  warn(
+Namespace(learning_rate=1e-06, lradj='cosine', train_epochs=100)
+  0%|          | 0/100 [00:00<?, ?it/s]  1%|          | 1/100 [00:29<48:01, 29.10s/it]  2%|▏         | 2/100 [00:53<42:40, 26.13s/it]  3%|▎         | 3/100 [01:17<41:03, 25.40s/it]  4%|▍         | 4/100 [01:41<39:44, 24.84s/it]  5%|▌         | 5/100 [02:06<39:13, 24.77s/it]  6%|▌         | 6/100 [02:29<38:02, 24.28s/it]  7%|▋         | 7/100 [02:53<37:11, 23.99s/it]  8%|▊         | 8/100 [03:16<36:34, 23.85s/it]  9%|▉         | 9/100 [03:39<35:57, 23.71s/it] 10%|█         | 10/100 [04:04<35:42, 23.81s/it] 11%|█         | 11/100 [04:28<35:29, 23.93s/it] 12%|█▏        | 12/100 [04:51<34:47, 23.73s/it] 13%|█▎        | 13/100 [05:15<34:24, 23.73s/it] 14%|█▍        | 14/100 [05:38<33:47, 23.58s/it] 15%|█▌        | 15/100 [06:02<33:28, 23.63s/it] 16%|█▌        | 16/100 [06:26<33:19, 23.81s/it] 17%|█▋        | 17/100 [06:50<32:53, 23.78s/it] 18%|█▊        | 18/100 [07:14<32:32, 23.81s/it] 19%|█▉        | 19/100 [07:37<31:49, 23.58s/it] 20%|██        | 20/100 [08:01<31:38, 23.73s/it] 21%|██        | 21/100 [08:24<31:08, 23.66s/it] 22%|██▏       | 22/100 [08:48<30:39, 23.58s/it] 23%|██▎       | 23/100 [09:11<30:09, 23.50s/it] 24%|██▍       | 24/100 [09:34<29:45, 23.49s/it] 25%|██▌       | 25/100 [09:58<29:20, 23.48s/it] 26%|██▌       | 26/100 [10:22<29:06, 23.60s/it] 27%|██▋       | 27/100 [10:45<28:40, 23.57s/it] 28%|██▊       | 28/100 [11:09<28:24, 23.67s/it] 29%|██▉       | 29/100 [11:32<27:38, 23.36s/it] 30%|███       | 30/100 [11:55<27:14, 23.35s/it] 31%|███       | 31/100 [12:18<26:51, 23.36s/it] 32%|███▏      | 32/100 [12:42<26:31, 23.41s/it] 33%|███▎      | 33/100 [13:05<26:06, 23.38s/it] 34%|███▍      | 34/100 [13:29<25:59, 23.63s/it] 35%|███▌      | 35/100 [13:53<25:30, 23.55s/it] 36%|███▌      | 36/100 [14:17<25:22, 23.79s/it] 37%|███▋      | 37/100 [14:41<24:51, 23.67s/it] 38%|███▊      | 38/100 [15:05<24:43, 23.93s/it] 39%|███▉      | 39/100 [15:29<24:18, 23.92s/it] 40%|████      | 40/100 [15:53<23:56, 23.94s/it] 41%|████      | 41/100 [16:17<23:27, 23.85s/it] 42%|████▏     | 42/100 [16:42<23:26, 24.26s/it] 43%|████▎     | 43/100 [17:05<22:49, 24.02s/it] 44%|████▍     | 44/100 [17:30<22:44, 24.37s/it] 45%|████▌     | 45/100 [17:54<22:04, 24.08s/it] 46%|████▌     | 46/100 [18:18<21:44, 24.16s/it] 47%|████▋     | 47/100 [18:41<21:05, 23.88s/it] 48%|████▊     | 48/100 [19:04<20:25, 23.57s/it] 49%|████▉     | 49/100 [19:27<19:56, 23.45s/it] 50%|█████     | 50/100 [19:50<19:24, 23.28s/it] 51%|█████     | 51/100 [20:14<19:00, 23.28s/it] 52%|█████▏    | 52/100 [20:37<18:39, 23.32s/it] 53%|█████▎    | 53/100 [21:00<18:16, 23.32s/it] 54%|█████▍    | 54/100 [21:23<17:45, 23.15s/it] 55%|█████▌    | 55/100 [21:46<17:21, 23.14s/it] 56%|█████▌    | 56/100 [22:11<17:15, 23.54s/it] 57%|█████▋    | 57/100 [22:34<16:45, 23.39s/it] 58%|█████▊    | 58/100 [22:56<16:11, 23.14s/it] 59%|█████▉    | 59/100 [23:21<16:04, 23.53s/it] 60%|██████    | 60/100 [23:45<15:44, 23.61s/it] 61%|██████    | 61/100 [24:07<15:11, 23.36s/it] 62%|██████▏   | 62/100 [24:31<14:51, 23.45s/it] 63%|██████▎   | 63/100 [24:54<14:25, 23.39s/it] 64%|██████▍   | 64/100 [25:18<14:07, 23.53s/it] 65%|██████▌   | 65/100 [25:41<13:35, 23.29s/it] 66%|██████▌   | 66/100 [26:04<13:08, 23.18s/it] 67%|██████▋   | 67/100 [26:27<12:46, 23.21s/it] 68%|██████▊   | 68/100 [26:50<12:24, 23.25s/it] 69%|██████▉   | 69/100 [27:14<11:59, 23.23s/it] 70%|███████   | 70/100 [27:37<11:38, 23.27s/it] 71%|███████   | 71/100 [28:00<11:11, 23.14s/it] 72%|███████▏  | 72/100 [28:24<10:56, 23.44s/it] 73%|███████▎  | 73/100 [28:47<10:30, 23.36s/it] 74%|███████▍  | 74/100 [29:10<10:02, 23.16s/it] 75%|███████▌  | 75/100 [29:34<09:46, 23.45s/it] 76%|███████▌  | 76/100 [29:57<09:22, 23.44s/it] 77%|███████▋  | 77/100 [30:21<09:03, 23.63s/it] 78%|███████▊  | 78/100 [30:45<08:40, 23.64s/it] 79%|███████▉  | 79/100 [31:08<08:14, 23.53s/it] 80%|████████  | 80/100 [31:31<07:48, 23.43s/it] 81%|████████  | 81/100 [31:56<07:28, 23.63s/it] 82%|████████▏ | 82/100 [32:20<07:09, 23.87s/it] 83%|████████▎ | 83/100 [32:43<06:43, 23.74s/it] 84%|████████▍ | 84/100 [33:07<06:20, 23.75s/it] 85%|████████▌ | 85/100 [33:31<05:56, 23.74s/it] 86%|████████▌ | 86/100 [33:54<05:31, 23.66s/it] 87%|████████▋ | 87/100 [34:18<05:07, 23.64s/it] 88%|████████▊ | 88/100 [34:42<04:43, 23.63s/it] 89%|████████▉ | 89/100 [35:05<04:19, 23.55s/it] 90%|█████████ | 90/100 [35:29<03:55, 23.57s/it] 91%|█████████ | 91/100 [35:52<03:31, 23.49s/it] 92%|█████████▏| 92/100 [36:15<03:07, 23.45s/it] 93%|█████████▎| 93/100 [36:38<02:43, 23.35s/it] 94%|█████████▍| 94/100 [37:02<02:20, 23.39s/it] 95%|█████████▌| 95/100 [37:26<01:57, 23.50s/it] 96%|█████████▌| 96/100 [37:49<01:34, 23.61s/it] 97%|█████████▋| 97/100 [38:13<01:10, 23.62s/it] 98%|█████████▊| 98/100 [38:37<00:47, 23.78s/it] 99%|█████████▉| 99/100 [39:01<00:23, 23.67s/it]100%|██████████| 100/100 [39:25<00:00, 23.97s/it]100%|██████████| 100/100 [39:25<00:00, 23.66s/it]
+Updating learning rate to 9.997532801828658e-07
+Epoch: 1 | Train Loss: 3.8532457
+Updating learning rate to 9.990133642141357e-07
+Epoch: 2 | Train Loss: 3.8163509
+Updating learning rate to 9.9778098230154e-07
+Epoch: 3 | Train Loss: 3.7999926
+Updating learning rate to 9.960573506572389e-07
+Epoch: 4 | Train Loss: 3.7921951
+Updating learning rate to 9.938441702975689e-07
+Epoch: 5 | Train Loss: 3.7844343
+Updating learning rate to 9.911436253643443e-07
+Epoch: 6 | Train Loss: 3.7755094
+Updating learning rate to 9.879583809693736e-07
+Epoch: 7 | Train Loss: 3.7669704
+Updating learning rate to 9.842915805643156e-07
+Epoch: 8 | Train Loss: 3.7598295
+Updating learning rate to 9.801468428384716e-07
+Epoch: 9 | Train Loss: 3.7538939
+Updating learning rate to 9.755282581475767e-07
+Epoch: 10 | Train Loss: 3.7485156
+Updating learning rate to 9.704403844771127e-07
+Epoch: 11 | Train Loss: 3.7433145
+Updating learning rate to 9.648882429441256e-07
+Epoch: 12 | Train Loss: 3.7382796
+Updating learning rate to 9.588773128419905e-07
+Epoch: 13 | Train Loss: 3.7335761
+Updating learning rate to 9.524135262330098e-07
+Epoch: 14 | Train Loss: 3.7292798
+Updating learning rate to 9.455032620941839e-07
+Epoch: 15 | Train Loss: 3.7253609
+Updating learning rate to 9.381533400219317e-07
+Epoch: 16 | Train Loss: 3.7216964
+Updating learning rate to 9.303710135019717e-07
+Epoch: 17 | Train Loss: 3.7181742
+Updating learning rate to 9.221639627510075e-07
+Epoch: 18 | Train Loss: 3.7147567
+Updating learning rate to 9.135402871372808e-07
+Epoch: 19 | Train Loss: 3.7114799
+Updating learning rate to 9.045084971874737e-07
+Epoch: 20 | Train Loss: 3.7083807
+Updating learning rate to 8.950775061878452e-07
+Epoch: 21 | Train Loss: 3.7054901
+Updating learning rate to 8.852566213878946e-07
+Epoch: 22 | Train Loss: 3.7027688
+Updating learning rate to 8.750555348152298e-07
+Epoch: 23 | Train Loss: 3.7001338
+Updating learning rate to 8.644843137107057e-07
+Epoch: 24 | Train Loss: 3.6975219
+Updating learning rate to 8.535533905932737e-07
+Epoch: 25 | Train Loss: 3.6949224
+Updating learning rate to 8.422735529643443e-07
+Epoch: 26 | Train Loss: 3.6923847
+Updating learning rate to 8.306559326618259e-07
+Epoch: 27 | Train Loss: 3.6899657
+Updating learning rate to 8.187119948743449e-07
+Epoch: 28 | Train Loss: 3.6876919
+Updating learning rate to 8.064535268264883e-07
+Epoch: 29 | Train Loss: 3.6855614
+Updating learning rate to 7.938926261462365e-07
+Epoch: 30 | Train Loss: 3.6835248
+Updating learning rate to 7.810416889260653e-07
+Epoch: 31 | Train Loss: 3.6815567
+Updating learning rate to 7.679133974894982e-07
+Epoch: 32 | Train Loss: 3.6796114
+Updating learning rate to 7.545207078751857e-07
+Epoch: 33 | Train Loss: 3.6777091
+Updating learning rate to 7.408768370508576e-07
+Epoch: 34 | Train Loss: 3.6758595
+Updating learning rate to 7.269952498697734e-07
+Epoch: 35 | Train Loss: 3.6740906
+Updating learning rate to 7.128896457825363e-07
+Epoch: 36 | Train Loss: 3.6723893
+Updating learning rate to 6.985739453173902e-07
+Epoch: 37 | Train Loss: 3.6707442
+Updating learning rate to 6.840622763423391e-07
+Epoch: 38 | Train Loss: 3.6691518
+Updating learning rate to 6.693689601226458e-07
+Epoch: 39 | Train Loss: 3.6675904
+Updating learning rate to 6.545084971874736e-07
+Epoch: 40 | Train Loss: 3.6660669
+Updating learning rate to 6.394955530196147e-07
+Epoch: 41 | Train Loss: 3.6645885
+Updating learning rate to 6.243449435824276e-07
+Epoch: 42 | Train Loss: 3.6631546
+Updating learning rate to 6.090716206982713e-07
+Epoch: 43 | Train Loss: 3.6617887
+Updating learning rate to 5.936906572928624e-07
+Epoch: 44 | Train Loss: 3.6604633
+Updating learning rate to 5.782172325201155e-07
+Epoch: 45 | Train Loss: 3.6591852
+Updating learning rate to 5.626666167821521e-07
+Epoch: 46 | Train Loss: 3.6579337
+Updating learning rate to 5.470541566592572e-07
+Epoch: 47 | Train Loss: 3.6567297
+Updating learning rate to 5.313952597646567e-07
+Epoch: 48 | Train Loss: 3.6555629
+Updating learning rate to 5.157053795390641e-07
+Epoch: 49 | Train Loss: 3.6544409
+Updating learning rate to 5e-07
+Epoch: 50 | Train Loss: 3.6533539
+Updating learning rate to 4.842946204609359e-07
+Epoch: 51 | Train Loss: 3.6523066
+Updating learning rate to 4.686047402353433e-07
+Epoch: 52 | Train Loss: 3.6513133
+Updating learning rate to 4.529458433407428e-07
+Epoch: 53 | Train Loss: 3.6503487
+Updating learning rate to 4.3733338321784777e-07
+Epoch: 54 | Train Loss: 3.6494117
+Updating learning rate to 4.2178276747988444e-07
+Epoch: 55 | Train Loss: 3.6485167
+Updating learning rate to 4.0630934270713755e-07
+Epoch: 56 | Train Loss: 3.6476579
+Updating learning rate to 3.909283793017288e-07
+Epoch: 57 | Train Loss: 3.6468277
+Updating learning rate to 3.7565505641757266e-07
+Epoch: 58 | Train Loss: 3.6460361
+Updating learning rate to 3.605044469803854e-07
+Epoch: 59 | Train Loss: 3.6452844
+Updating learning rate to 3.454915028125263e-07
+Epoch: 60 | Train Loss: 3.6445527
+Updating learning rate to 3.306310398773543e-07
+Epoch: 61 | Train Loss: 3.6438520
+Updating learning rate to 3.15937723657661e-07
+Epoch: 62 | Train Loss: 3.6431952
+Updating learning rate to 3.014260546826097e-07
+Epoch: 63 | Train Loss: 3.6425564
+Updating learning rate to 2.8711035421746363e-07
+Epoch: 64 | Train Loss: 3.6419506
+Updating learning rate to 2.730047501302266e-07
+Epoch: 65 | Train Loss: 3.6413720
+Updating learning rate to 2.591231629491423e-07
+Epoch: 66 | Train Loss: 3.6408186
+Updating learning rate to 2.4547929212481435e-07
+Epoch: 67 | Train Loss: 3.6402984
+Updating learning rate to 2.3208660251050156e-07
+Epoch: 68 | Train Loss: 3.6398082
+Updating learning rate to 2.1895831107393482e-07
+Epoch: 69 | Train Loss: 3.6393368
+Updating learning rate to 2.0610737385376348e-07
+Epoch: 70 | Train Loss: 3.6388960
+Updating learning rate to 1.9354647317351187e-07
+Epoch: 71 | Train Loss: 3.6384840
+Updating learning rate to 1.812880051256551e-07
+Epoch: 72 | Train Loss: 3.6380885
+Updating learning rate to 1.6934406733817413e-07
+Epoch: 73 | Train Loss: 3.6377234
+Updating learning rate to 1.5772644703565564e-07
+Epoch: 74 | Train Loss: 3.6373754
+Updating learning rate to 1.4644660940672627e-07
+Epoch: 75 | Train Loss: 3.6370583
+Updating learning rate to 1.3551568628929432e-07
+Epoch: 76 | Train Loss: 3.6367550
+Updating learning rate to 1.249444651847702e-07
+Epoch: 77 | Train Loss: 3.6364787
+Updating learning rate to 1.1474337861210543e-07
+Epoch: 78 | Train Loss: 3.6362250
+Updating learning rate to 1.0492249381215478e-07
+Epoch: 79 | Train Loss: 3.6359849
+Updating learning rate to 9.549150281252632e-08
+Epoch: 80 | Train Loss: 3.6357663
+Updating learning rate to 8.645971286271903e-08
+Epoch: 81 | Train Loss: 3.6355653
+Updating learning rate to 7.783603724899257e-08
+Epoch: 82 | Train Loss: 3.6353860
+Updating learning rate to 6.962898649802822e-08
+Epoch: 83 | Train Loss: 3.6352227
+Updating learning rate to 6.184665997806831e-08
+Epoch: 84 | Train Loss: 3.6350732
+Updating learning rate to 5.44967379058161e-08
+Epoch: 85 | Train Loss: 3.6349394
+Updating learning rate to 4.758647376699032e-08
+Epoch: 86 | Train Loss: 3.6348197
+Updating learning rate to 4.112268715800943e-08
+Epoch: 87 | Train Loss: 3.6347103
+Updating learning rate to 3.5111757055874326e-08
+Epoch: 88 | Train Loss: 3.6346250
+Updating learning rate to 2.955961552288727e-08
+Epoch: 89 | Train Loss: 3.6345458
+Updating learning rate to 2.4471741852423233e-08
+Epoch: 90 | Train Loss: 3.6344771
+Updating learning rate to 1.9853157161528468e-08
+Epoch: 91 | Train Loss: 3.6344185
+Updating learning rate to 1.570841943568446e-08
+Epoch: 92 | Train Loss: 3.6343703
+Updating learning rate to 1.2041619030626282e-08
+Epoch: 93 | Train Loss: 3.6343327
+Updating learning rate to 8.856374635655695e-09
+Epoch: 94 | Train Loss: 3.6343007
+Updating learning rate to 6.15582970243117e-09
+Epoch: 95 | Train Loss: 3.6342793
+Updating learning rate to 3.9426493427611175e-09
+Epoch: 96 | Train Loss: 3.6342611
+Updating learning rate to 2.2190176984600016e-09
+Epoch: 97 | Train Loss: 3.6342530
+Updating learning rate to 9.866357858642205e-10
+Epoch: 98 | Train Loss: 3.6342463
+Updating learning rate to 2.4671981713419997e-10
+Epoch: 99 | Train Loss: 3.6342421
+Updating learning rate to 0.0
+Epoch: 100 | Train Loss: 3.6342430
