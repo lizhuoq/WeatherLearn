@@ -105,8 +105,6 @@ Published on npj Climate and Atmospheric Science: [FuXi: a cascade machine learn
 ](https://www.nature.com/articles/s41612-023-00512-1)
 
 by Lei Chen, Xiaohui Zhong, Feng Zhang, Yuan Cheng, Yinghui Xu, Yuan Qi, Hao Li
-## License
-[BY-NC-SA 4.0 license](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 ## TODO
 - [ ] FengWu Model (https://arxiv.org/pdf/2304.02948v1.pdf)
