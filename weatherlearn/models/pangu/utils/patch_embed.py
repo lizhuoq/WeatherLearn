@@ -72,7 +72,7 @@ class PatchEmbed3D(nn.Module):
         padding_left = padding_right = padding_top = padding_bottom = padding_front = padding_back = 0
 
         l_remainder = level % l_patch_size
-        h_remainder = height % l_patch_size
+        h_remainder = height % h_patch_size
         w_remainder = width % w_patch_size
 
         if l_remainder:

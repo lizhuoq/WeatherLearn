@@ -1,18 +1,21 @@
 [tool.poetry]
 name = "WeatherLearn"
-version = "0.1.0"
+version = "0.1.1"
 description = "Implementation of the PyTorch version of the Weather Deep Learning Model Zoo."
 authors = ["Li zhuoqun <m15004059308@163.com>"]
 license = "BY-NC-SA 4.0"
 readme = "README.md"
+packages = [{ include = "weatherlearn" }]
 
 [tool.poetry.dependencies]
 python = "^3.11"
-torch = "2.1.0"
-timm = "0.9.10"
-numpy = "1.23.5"
-cdsapi = "0.6.1"
-
+# Relaxed from exact pins (torch==2.1.0, timm==0.9.10, numpy==1.23.5, cdsapi==0.6.1)
+# so modern Python (3.12/3.13) and current torch/timm wheels install cleanly.
+# Lower bounds preserve the originally documented stack; upper bounds left open for torch+timm.
+torch = ">=2.1.0"
+timm = ">=0.9.10"
+numpy = ">=1.23.5"
+cdsapi = ">=0.6.1"
 
 [build-system]
 requires = ["poetry-core"]

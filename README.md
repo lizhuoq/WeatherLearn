@@ -7,9 +7,23 @@ Implementation of the PyTorch version of the Weather Deep Learning Model Zoo.
 ## Dependencies
 ```
 python = "^3.11"
-torch = "2.1.0"
-timm = "0.9.10"
-numpy = "1.23.5"
+torch = ">=2.1.0"
+timm = ">=0.9.10"
+numpy = ">=1.23.5"
+cdsapi = ">=0.6.1"
+```
+
+Install (editable):
+
+```bash
+pip install -e .
+# or with Poetry after `poetry lock` / `poetry install`
+```
+
+Run unit tests (skips full `Pangu()` unless `WEATHERLEARN_RUN_HEAVY=1`):
+
+```bash
+python -m unittest discover -s tests -v
 ```
 
 ## Model-zoo
@@ -88,15 +102,19 @@ if __name__ == '__main__':
     in_chans = out_chans = 70  # number of input channels or output channels
     input = torch.randn(B, in_chans, 2, 721, 1440)  # B C T Lat Lon
     
-    fuxi = Fuxi()  
+    fuxi = Fuxi()
     # patch_size : Default: (2, 4, 4)
     # embed_dim : Default: 1536
     # num_groups : Default: 32
     # num_heads : Default: 8
     # window_size : Default: 7
-    
+    # depth : Default: 48  (U-Transformer Swin blocks; reduce for lite smoke)
+
     output = fuxi(input)  # B C Lat Lon
-```  
+```
+
+Last layer matches the paper: **Linear patch FC** → reshape to 720×1440 → **bilinear interpolate** to 721×1440. See [`docs/fuxi_last_layer.md`](docs/fuxi_last_layer.md) (clarifies [Issue #8](https://github.com/lizhuoq/WeatherLearn/issues/8)).
+
 #### References
 [FuXi: A cascade machine learning forecasting system for 15-day global weather forecast
 ](https://arxiv.org/abs/2306.12873)

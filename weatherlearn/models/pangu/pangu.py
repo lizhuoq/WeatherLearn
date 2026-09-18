@@ -1,7 +1,10 @@
 import torch
 from torch import nn
 import numpy as np
-from timm.models.layers import trunc_normal_, DropPath
+try:
+    from timm.layers import trunc_normal_, DropPath
+except ImportError:  # timm < 0.9 / older layout
+    from timm.models.layers import trunc_normal_, DropPath
 
 from .utils.earth_position_index import get_earth_position_index
 from .utils.shift_window_mask import get_shift_window_mask, window_partition, window_reverse
@@ -218,8 +221,10 @@ class EarthSpecificBlock(nn.Module):
                  qkv_bias=True, qk_scale=None, drop=0., attn_drop=0., drop_path=0., act_layer=nn.GELU,
                  norm_layer=nn.LayerNorm):
         super().__init__()
-        window_size = (2, 6, 12) if window_size is None else window_size
-        shift_size = (1, 3, 6) if shift_size is None else shift_size
+        # Paper / official: Wpl×Wlat×Wlon = 2×12×6. Official pseudocode uses
+        # (2, 6, 12) on (pl, lon, lat); this repo stores (pl, lat, lon), so (2, 12, 6).
+        window_size = (2, 12, 6) if window_size is None else window_size
+        shift_size = tuple(w // 2 for w in window_size) if shift_size is None else shift_size
         self.dim = dim
         self.input_resolution = input_resolution
         self.num_heads = num_heads
@@ -358,7 +363,7 @@ class Pangu(nn.Module):
         window_size (tuple[int]): Window size.
     """
 
-    def __init__(self, embed_dim=192, num_heads=(6, 12, 12, 6), window_size=(2, 6, 12)):
+    def __init__(self, embed_dim=192, num_heads=(6, 12, 12, 6), window_size=(2, 12, 6)):
         super().__init__()
         drop_path = np.linspace(0, 0.2, 8).tolist()
         # In addition, three constant masks(the topography mask, land-sea mask and soil type mask)
@@ -477,7 +482,7 @@ class Pangu_lite(nn.Module):
         num_heads (tuple[int]): Number of attention heads in different layers.
         window_size (tuple[int]): Window size.
     """
-    def __init__(self, embed_dim=192, num_heads=(6, 12, 12, 6), window_size=(2, 6, 12)):
+    def __init__(self, embed_dim=192, num_heads=(6, 12, 12, 6), window_size=(2, 12, 6)):
         super().__init__()
         drop_path = np.linspace(0, 0.2, 8).tolist()
         # In addition, three constant masks(the topography mask, land-sea mask and soil type mask)

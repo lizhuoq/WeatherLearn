@@ -1,10 +1,14 @@
+import os
+import unittest
+
 import torch
 
 from weatherlearn.models.pangu.pangu import EarthAttention3D, UpSample, DownSample, EarthSpecificBlock, BasicLayer
 from weatherlearn.models.pangu.utils.shift_window_mask import get_shift_window_mask
 from weatherlearn.models import Pangu, Pangu_lite
 
-import unittest
+# Full Pangu() @ 721x1440 is memory-heavy; skip unless explicitly requested.
+_RUN_HEAVY = os.environ.get("WEATHERLEARN_RUN_HEAVY", "0") == "1"
 
 
 class TestMain(unittest.TestCase):
@@ -102,6 +106,18 @@ class TestMain(unittest.TestCase):
         layer_x = layer(x)
         self.assertEqual(layer_x.shape, x.shape)
 
+    def test_default_window_matches_paper_axis_order(self):
+        """Repo axis order is (pl, lat, lon); paper Wpl×Wlat×Wlon = 2×12×6."""
+        block0 = EarthSpecificBlock(4, (8, 181, 360), 1)  # shift_size None → half window
+        block1 = EarthSpecificBlock(4, (8, 181, 360), 1, shift_size=(0, 0, 0))
+        self.assertEqual(block0.window_size, (2, 12, 6))
+        self.assertEqual(block0.shift_size, (1, 6, 3))
+        self.assertEqual(block1.window_size, (2, 12, 6))
+
+    @unittest.skipUnless(
+        _RUN_HEAVY,
+        "full Pangu() OOM-prone on modest machines; set WEATHERLEARN_RUN_HEAVY=1 to run",
+    )
     def test_pangu(self):
         pangu = Pangu()
         surface = torch.randn(1, 4, 721, 1440)

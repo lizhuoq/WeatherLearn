@@ -91,3 +91,15 @@ class PatchEmbedTest(unittest.TestCase):
         )
         upper_air_embed = patchembed3d(upper_air)
         self.assertEqual(upper_air_embed.shape, (1, 1, 7, 181, 360))
+
+    def test_patch_embed3d_height_pad_uses_h_patch(self):
+        """Regression: height remainder must use h_patch_size, not l_patch_size.
+
+        With img (3, 8, 8) and patch (2, 3, 2), height=8 is divisible by l=2 but not
+        by h=3. Padding must yield height 9 → 3 tokens along latitude.
+        """
+        img = torch.rand(1, 4, 3, 8, 8)
+        pe_3d = PatchEmbed3D((3, 8, 8), (2, 3, 2), 4, 8)
+        out = pe_3d(img)
+        self.assertEqual(out.shape, (1, 8, 2, 3, 4))
+

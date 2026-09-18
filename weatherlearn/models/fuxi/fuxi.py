@@ -152,13 +152,14 @@ class Fuxi(nn.Module):
         num_groups (Sequence[int] | int, optional): number of groups to separate the channels into.
         num_heads (int, optional): Number of attention heads.
         window_size (int | tuple[int], optional): Local window size.
+        depth (int, optional): Number of Swin Transformer V2 blocks in U-Transformer. Default: 48.
     """
     def __init__(self, img_size=(2, 721, 1440), patch_size=(2, 4, 4), in_chans=70, out_chans=70,
-                 embed_dim=1536, num_groups=32, num_heads=8, window_size=7):
+                 embed_dim=1536, num_groups=32, num_heads=8, window_size=7, depth=48):
         super().__init__()
         input_resolution = int(img_size[1] / patch_size[1] / 2), int(img_size[2] / patch_size[2] / 2)
         self.cube_embedding = CubeEmbedding(img_size, patch_size, in_chans, embed_dim)
-        self.u_transformer = UTransformer(embed_dim, num_groups, input_resolution, num_heads, window_size, depth=48)
+        self.u_transformer = UTransformer(embed_dim, num_groups, input_resolution, num_heads, window_size, depth=depth)
         self.fc = nn.Linear(embed_dim, out_chans * patch_size[1] * patch_size[2])
 
         self.patch_size = patch_size
@@ -180,7 +181,8 @@ class Fuxi(nn.Module):
         x = x.reshape(B, Lat * patch_lat, Lon * patch_lon, self.out_chans)
         x = x.permute(0, 3, 1, 2)  # B C Lat Lon
 
-        # bilinear
+        # Paper: FC patch expand -> reshape to (C, 720, 1440) -> bilinear to (C, 721, 1440).
+        # See docs/fuxi_last_layer.md (Issue #8 clarification).
         x = F.interpolate(x, size=self.img_size[1:], mode="bilinear")
 
         return x
