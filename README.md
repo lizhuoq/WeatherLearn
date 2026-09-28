@@ -124,8 +124,28 @@ Published on npj Climate and Atmospheric Science: [FuXi: a cascade machine learn
 
 by Lei Chen, Xiaohui Zhong, Feng Zhang, Yuan Cheng, Yinghui Xu, Yuan Qi, Hao Li
 
+
+### FengWu
+Multi-modal encode–fuse–decode (arXiv:2304.02948). Default **13 levels / 69 channels** (OpenEarthLab practical); paper **37 levels / 189 channels** via `n_levels=37`.
+
+```python
+from weatherlearn.models import FengWu, FengWu_lite
+import torch
+
+# Lite (smoke / small grid). ARCO 128x64 zarr is transposed to Lat×Lon (64, 128).
+model = FengWu_lite()  # img_size=(64, 128), n_levels=13 → C=69
+x = torch.randn(1, 69, 64, 128)
+y = model(x)  # [1, 69, 64, 128]
+
+# Optional uncertainty head (mean, log_var)
+model_u = FengWu_lite(predict_uncertainty=True)
+mean, log_var = model_u(x)
+```
+
+Train smoke (public GCS ERA5): `python examples/fengwu/train_smoke_gcs.py`
+
 ## TODO
-- [ ] FengWu Model (https://arxiv.org/pdf/2304.02948v1.pdf)
+- [x] FengWu Model (https://arxiv.org/pdf/2304.02948v1.pdf) — see `weatherlearn/models/fengwu`, `examples/fengwu/`
 - [x] FuXi Model (https://arxiv.org/pdf/2306.12873v3.pdf)  
 - [x] Set a separate window_size for longitude and latitude in the Fuxi model.
 - [ ] Add more unittest.
